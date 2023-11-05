@@ -66,44 +66,35 @@ class _HomeScreenState extends State<HomeScreen> {
             onRefresh: () async {
               value.loadUserFromJson();
             },
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  GridView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
-                    itemCount: value.state.users.length,
-                    itemBuilder: (context, index) {
-                      var user = value.state.users[index];
-                      return GestureDetector(
-                        onTap: () {
-                          context.router.push(DetailRoute(user: user));
-                        },
-                        child: Card(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: context.primaryColor,
-                              ),
-                              SizedBox(height: 10.h),
-                              Text(
-                                "${user.firstName} ${user.lastName}",
-                                style: context.bodyMedium
-                                    ?.copyWith(color: context.onSurfaceColor),
-                              ),
-                            ],
-                          ),
+            child: GridView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+              itemCount: value.state.users.length,
+              itemBuilder: (context, index) {
+                var user = value.state.users[index];
+                return GestureDetector(
+                  onTap: (){
+                    context.router.push(DetailRoute(user: user));
+                  },
+                  child: Card(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: context.primaryColor,
                         ),
-                      );
-                    },
+                        SizedBox(height: 10.h),
+                        Text(
+                          "${user.firstName} ${user.lastName}",
+                          style: context.bodyMedium
+                              ?.copyWith(color: context.onSurfaceColor),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                );
+              },
             ),
           );
         },
